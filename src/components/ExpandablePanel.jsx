@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
+import Button from "./Button";
 
 function ExpandablePanel({ header, children, className }) {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
-		<div className={`mb-4 rounded bg-gray-200 ${className}`}>
-			<div className="flex justify-between items-center">
-				<h3 className="p-4 flex justify-between items-center">{header}</h3>
+		<div className={`mb-4 rounded ${className}`}>
+			<div className="px-2 flex justify-between items-center border border-gray-300 rounded-sm shadow-sm">
+				<h3 className="p-3 flex justify-between items-center">{header}</h3>
 
-				<div
+				<Button
+					rounded
+					className="text-gray-500 hover:bg-blue-200"
 					onClick={() => setIsExpanded(!isExpanded)}
-					className="p-4 cursor-pointer"
 				>
 					{isExpanded ? <GoChevronDown /> : <GoChevronUp />}
-				</div>
+				</Button>
 			</div>
-			{isExpanded && <div className={`pb-2 border`}>{children}</div>}
+			{isExpanded && children}
 		</div>
 	);
 }
