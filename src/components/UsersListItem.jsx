@@ -4,6 +4,7 @@ import { removeUser } from "../store";
 import Button from "./Button";
 import ExpandablePanel from "./ExpandablePanel";
 import { GoX } from "react-icons/go";
+import AlbumList from "./AlbumList";
 
 function UsersListItem({ user }) {
 	const [doRemoveUser, isLoading, error] = useThunk(removeUser);
@@ -16,8 +17,8 @@ function UsersListItem({ user }) {
 		<>
 			<Button
 				loading={isLoading}
-				outline
-				className="hover:bg-red-500 transition mr-4"
+				rounded
+				className="text-gray-500 hover:bg-red-200 mr-4"
 				onClick={() => handleRemoveUser(user)}
 			>
 				<GoX />
@@ -27,7 +28,11 @@ function UsersListItem({ user }) {
 		</>
 	);
 
-	return <ExpandablePanel header={header}></ExpandablePanel>;
+	return (
+		<ExpandablePanel header={header}>
+			<AlbumList user={user} />
+		</ExpandablePanel>
+	);
 }
 
 export default UsersListItem;
