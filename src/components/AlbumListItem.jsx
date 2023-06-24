@@ -2,6 +2,7 @@ import { GoX } from "react-icons/go";
 import { useDeleteAlbumMutation } from "../store/apis/albumsApi";
 import Button from "./Button";
 import ExpandablePanel from "./ExpandablePanel";
+import PhotosList from "./PhotosList";
 
 function AlbumListItem({ album }) {
 	const [deleteAlbum, { isLoading: isDeletingAlbum, error: deleteError }] =
@@ -23,10 +24,9 @@ function AlbumListItem({ album }) {
 	);
 
 	return (
-		<ExpandablePanel
-			className="bg-white rounded-sm"
-			header={header}
-		></ExpandablePanel>
+		<ExpandablePanel className="bg-white rounded-sm" header={header}>
+			<PhotosList album={album} />
+		</ExpandablePanel>
 	);
 }
 export default AlbumListItem;
