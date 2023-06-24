@@ -30,15 +30,16 @@ const albumsApi = createApi({
 			},
 			// CREATING DYNAMIC TAGS
 			providesTags: (result, error, user) => {
-				return [{ type: "Album", id: user.id }];
+				const tags = result.map((album) => {
+					return { type: "Album", id: album.id };
+				});
+				tags.push({ type: "UsersAlbums", id: user.id });
+				return tags;
 			},
 		}),
 
 		// create a new album
 		addAlbum: builder.mutation({
-			invalidatesTags: (result, error, user) => {
-				return [{ type: "Album", id: user.id }];
-			},
 			query: (user) => ({
 				url: `/albums`,
 				method: "POST",
@@ -47,6 +48,9 @@ const albumsApi = createApi({
 					title: faker.commerce.productName(),
 				},
 			}),
+			invalidatesTags: (result, error, user) => {
+				return [{ type: "UsersAlbums", id: user.id }];
+			},
 		}),
 
 		// delete the album
@@ -55,8 +59,7 @@ const albumsApi = createApi({
 				return { url: `/albums/${album.id}`, method: "DELETE" };
 			},
 			invalidatesTags: (result, error, album) => {
-				// console.log(album);
-				return [{ type: "Album", id: album.userId }];
+				return [{ type: "Album", id: album.id }];
 			},
 		}),
 	}),
