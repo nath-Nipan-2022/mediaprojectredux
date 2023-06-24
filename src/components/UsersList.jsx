@@ -30,14 +30,14 @@ export default function UsersList() {
 
 	return (
 		<div className="m-4">
-			<div className="pb-2 mb-2 flex items-center justify-between border-b border-b-gray-400">
-				<h2>Users List</h2>
+			<div className="pb-2 mb-2 flex items-center justify-between">
+				<h2 className="text-2xl">Users List</h2>
 
 				<Button
-					loadingWithChildren={isCreatingUser}
-					outline
+					loading={isCreatingUser}
+					primary
 					onClick={handleAddUser}
-					className="border border-gray-300 hover:bg-gray-200 transition"
+					className=" hover:bg-blue-600 transition"
 				>
 					Add User
 				</Button>
