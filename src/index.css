@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-skeleton-400: 210 12% 92%;
+    --bg-skeleton-500: 242 16% 85%;
+  }
+}
